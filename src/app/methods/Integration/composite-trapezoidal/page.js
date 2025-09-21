@@ -1,0 +1,1 @@
+// Composite Trapezoidal page.js

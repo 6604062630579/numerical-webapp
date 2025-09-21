@@ -1,0 +1,1 @@
+// Graphical Method page.js

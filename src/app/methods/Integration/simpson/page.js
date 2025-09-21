@@ -1,0 +1,1 @@
+// Simpson Rule page.js

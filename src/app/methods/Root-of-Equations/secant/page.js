@@ -1,0 +1,1 @@
+// Secant Method page.js
