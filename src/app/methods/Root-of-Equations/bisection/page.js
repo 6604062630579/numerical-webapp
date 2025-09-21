@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import Plot from "react-plotly.js";
+import PlotClient from "@/components/PlotClient";
 
 export default function BisectionPage() {
   const [expr, setExpr] = useState("x^5 - x + 1");
@@ -102,7 +103,7 @@ export default function BisectionPage() {
                 (a, b) => a.x - b.x
               );
               return (
-                <Plot
+                <PlotClient
                   data={[
                     {
                       x: sortedData.map((it) => it.x),
@@ -121,7 +122,6 @@ export default function BisectionPage() {
                     hovermode: "closest",
                     dragmode: "pan",
                   }}
-                  config={{ scrollZoom: true, displaylogo: false }}
                   style={{ width: "100%" }}
                 />
               );
