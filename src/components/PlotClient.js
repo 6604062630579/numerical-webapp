@@ -1,13 +1,16 @@
 "use client";
-
 import dynamic from "next/dynamic";
+import createPlotlyComponent from "react-plotly.js/factory";
+import Plotly from "plotly.js-basic-dist";
 
-// ✅ ใช้ plotly.js-basic-dist แทนตัวเต็ม
-const Plot = dynamic(() => import("react-plotly.js"), {
-  ssr: false,
-  loading: () => <p>Loading chart...</p>,
-});
+const Plot = createPlotlyComponent(Plotly);
+const DynamicPlot = dynamic(
+  () => Promise.resolve((props) => <Plot {...props} />),
+  { ssr: false }
+);
 
 export default function PlotClient(props) {
-  return <Plot {...props} config={{ displaylogo: false, scrollZoom: true }} />;
+  return (
+    <DynamicPlot {...props} config={{ displaylogo: false, scrollZoom: true }} />
+  );
 }
