@@ -7,16 +7,11 @@ import PlotClient from "@/components/PlotClient";
 import { size } from "mathjs";
 
 export default function BisectionClient() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
   const [expr, setExpr] = useState("x^5 - x + 1");
   const [a, setA] = useState(-2);
   const [b, setB] = useState(-1);
   const [precision, setPrecision] = useState(6);
   const [result, setResult] = useState(null);
-
-  if (!mounted) return null;
 
   const handleCalculate = async (e) => {
     e.preventDefault();

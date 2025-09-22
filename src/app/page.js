@@ -5,9 +5,6 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
 
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
   const [category, setCategory] = useState("");
   const [method, setMethod] = useState("");
   const [precision, setPrecision] = useState(6);
@@ -61,8 +58,6 @@ export default function Home() {
       router.push(`${categories[category][method]}?precision=${precision}`);
     }
   };
-
-  if (!mounted) return null;
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-50">
