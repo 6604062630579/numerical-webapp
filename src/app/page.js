@@ -65,7 +65,7 @@ export default function Home() {
         <h1 className="text-2xl font-bold text-center mb-2">
           Numerical Methods
         </h1>
-        <p className="text-gray-500 text-center mb-6">
+        <p className="text-black text-center mb-6">
           Choose a type of problem, method, and precision to get started
         </p>
 
