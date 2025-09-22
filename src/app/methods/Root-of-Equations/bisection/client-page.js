@@ -1,16 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import PlotClient from "@/components/PlotClient";
+import { size } from "mathjs";
 
 export default function BisectionClient() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const [expr, setExpr] = useState("x^5 - x + 1");
   const [a, setA] = useState(-2);
   const [b, setB] = useState(-1);
   const [precision, setPrecision] = useState(6);
   const [result, setResult] = useState(null);
+
+  if (!mounted) return null;
 
   const handleCalculate = async (e) => {
     e.preventDefault();
@@ -30,9 +36,7 @@ export default function BisectionClient() {
 
   return (
     <div className="p-8 max-w-5xl mx-auto bg-white rounded-xl shadow">
-      <h1 className="text-2xl font-bold text-center mb-4">
-        🪓 Bisection Method
-      </h1>
+      <h1 className="text-2xl font-bold text-center mb-4">Bisection Method</h1>
 
       {/* Equation */}
       <div className="border p-4 rounded bg-gray-50 text-center mb-4 text-2xl">
@@ -93,7 +97,6 @@ export default function BisectionClient() {
       {/* Results */}
       {result && !result.error && (
         <>
-          {/* Graph */}
           <div className="mt-6">
             <h2 className="text-xl font-semibold mb-2">Graph</h2>
             {(() => {
@@ -108,18 +111,19 @@ export default function BisectionClient() {
                       y: sortedData.map((it) => it.fx),
                       type: "scatter",
                       mode: "lines+markers",
-                      line: { color: "green" },
-                      marker: { color: "red", size: 8 },
+                      line: { color: "green", width: 1 },
+                      marker: { color: "red", size: 5 },
                       name: "Bisection steps",
                     },
                   ]}
                   layout={{
                     autosize: true,
-                    height: 400,
-                    margin: { t: 30, r: 20, l: 40, b: 40 },
+                    margin: { t: 30, r: 30, l: 50, b: 50 },
                     hovermode: "closest",
                     dragmode: "pan",
                   }}
+                  useResizeHandler={true}
+                  style={{ width: "100%", height: "100%" }}
                 />
               );
             })()}

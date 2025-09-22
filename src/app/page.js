@@ -1,13 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter();
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const [category, setCategory] = useState("");
   const [method, setMethod] = useState("");
-  const [precision, setPrecision] = useState(6); // ค่า default
+  const [precision, setPrecision] = useState(6);
 
   const categories = {
     "Root of Equations": {
@@ -55,10 +58,11 @@ export default function Home() {
 
   const handleStart = () => {
     if (category && method) {
-      // แนบ precision ไปใน query string
       router.push(`${categories[category][method]}?precision=${precision}`);
     }
   };
+
+  if (!mounted) return null;
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-50">
@@ -118,9 +122,7 @@ export default function Home() {
           value={precision}
           onChange={(e) => {
             const val = parseInt(e.target.value);
-            if (val >= 1 && val <= 10) {
-              setPrecision(val);
-            }
+            if (val >= 1 && val <= 10) setPrecision(val);
           }}
         />
 
